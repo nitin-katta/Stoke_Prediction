@@ -73,3 +73,17 @@ Model performance was assessed using:
 - **F1-Score**: Harmonic mean of precision and recall.  
 - **ROC-AUC**: Area under the Receiver Operating Characteristic curve.  
 
+## ⚙️ New: End-to-End ML Pipeline (Production Version)
+
+In addition to the Jupyter Notebook, a **Python-based pipeline** (`src/stroke_prediction.py`) has been implemented for automation and reproducibility.  
+This script integrates **data cleaning**, **oversampling**, **feature preprocessing**, and **model training** into one executable workflow.
+### 🔧 Pipeline Components
+
+| Step | Description |
+|------|--------------|
+| **Data Cleaning** | Custom transformers fill missing smoking values, drop nulls, and remove “Other” gender entries. |
+| **Oversampling** | Uses `RandomOverSampler` (from `imblearn`) with `sampling_strategy=0.5` to balance stroke/non-stroke data. |
+| **Preprocessing** | Scales numeric features (`bmi`, `avg_glucose_level`) and one-hot encodes categorical ones. |
+| **Model Training** | Trains a `RandomForestClassifier` with random_state=101. |
+| **Cross-Validation** | Evaluates model with 5-fold CV on accuracy, precision, and recall. |
+| **Model Saving** | Saves trained pipeline as `stroke_model.pkl` using `joblib`. |
